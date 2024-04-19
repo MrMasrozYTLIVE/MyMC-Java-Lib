@@ -10,7 +10,7 @@ import net.mitask.MyMCLib;
 MyMCLib myMcLink = new MyMCLib("API_KEY_HERE");
 
 // Will print information about API key expiration date
-console.log(myMcLink.getTime().toString()); 
+System.out.println(myMcLink.getTime().toString()); 
 
 // Will start the server
 myMcLink.startServer();
