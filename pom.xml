@@ -41,4 +41,12 @@
             <artifactId>unirest-modules-gson</artifactId>
         </dependency>
     </dependencies>
+
+   <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/MrMasrozYTLIVE/MyMC-Java-Lib</url>
+    </repository>
+  </distributionManagement>
 </project>
