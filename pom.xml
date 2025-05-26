@@ -4,9 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.mitask</groupId>
+    <groupId>io.github.mrmasrozytlive</groupId>
     <artifactId>mymc-java-lib</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.2.0</version>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Just a simple library that lets you work with my-mc.link API</description>
+    <url>https://github.com/MrMasrozYTLIVE/MyMC-Java-Lib</url>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -40,13 +44,109 @@
             <groupId>com.konghq</groupId>
             <artifactId>unirest-modules-gson</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.38</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
-   <distributionManagement>
-    <repository>
-      <id>github</id>
-      <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/MrMasrozYTLIVE/MyMC-Java-Lib</url>
-    </repository>
-  </distributionManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.4.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <tokenAuth>true</tokenAuth>
+                    <autoPublish>true</autoPublish>
+                    <waitUntil>published</waitUntil>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                    <id>attach-sources</id>
+                    <phase>deploy</phase>
+                    <goals><goal>jar-no-fork</goal></goals> 
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin> 
+                <artifactId>maven-javadoc-plugin</artifactId> 
+                <executions> 
+                    <execution> 
+                    <id>attach-javadocs</id>
+                    <phase>deploy</phase>
+                    <goals><goal>jar</goal></goals> 
+                    </execution> 
+                </executions> 
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                    <id>sign-artifacts</id>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>sign</goal>
+                    </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin> 
+                <!-- explicitly define maven-deploy-plugin after other to force exec order -->
+                <artifactId>maven-deploy-plugin</artifactId> 
+                <executions> 
+                    <execution> 
+                    <id>deploy</id>
+                    <phase>deploy</phase>
+                    <goals><goal>deploy</goal></goals> 
+                    </execution> 
+                </executions> 
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.38</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <developers>
+        <developer>
+            <name>Andrey (MiTask)</name>
+            <email>hfhy5435@gmail.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/MrMasrozYTLIVE/MyMC-Java-Lib.git</connection>
+        <developerConnection>scm:git:ssh://github.com:MrMasrozYTLIVE/MyMC-Java-Lib.git</developerConnection>
+        <url>http://github.com/MrMasrozYTLIVE/MyMC-Java-Lib/tree/main</url>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>the Unlicense</name>
+            <url>https://unlicense.org/</url>
+        </license>
+    </licenses>
 </project>
